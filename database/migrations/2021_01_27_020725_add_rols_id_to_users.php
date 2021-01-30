@@ -15,7 +15,10 @@ class AddRolsIdToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             
+            //Agregar Relaciones a la tabla de usuarios en la base de datos
+
             $table->foreignId('role_id')->references('id')->on('roles');
+            $table->foreignId('estatus_id')->references('id')->on('estatus');
 
         });
     }
@@ -29,8 +32,13 @@ class AddRolsIdToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             
-            $table->dropForeing(['role_id']);
+            //Quitar Relaciones entre tablas
+
+            $table->dropForeign(['role_id']);
             $table->dropColumn('role_id');
+
+            $table->dropForeign(['estatus_id']);
+            $table->dropColumn('estatus_id');
 
         });
     }
